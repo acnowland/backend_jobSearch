@@ -7,6 +7,11 @@ router.get("/", (req, res) => {
   Post.find({}).then((posts) => res.send(posts));
 });
 
+//Get by ID
+router.get("/:id", (req, res) => {
+  Post.findById(req.params.id).then((post) => res.send(post));
+});
+
 // Post
 router.post("/", (req, res) => {
   const newPost = new Post({
@@ -18,5 +23,11 @@ router.post("/", (req, res) => {
 });
 
 //Delete
+router.delete("/:id", (req, res) => {
+  Post.findById(req.params.id)
+    .then((item) => item.remove())
+    .then(() => res.send({ message: "Item Removed" }))
+    .catch((err) => res.send({ message: "Failed to delete:" + err }));
+});
 
 module.exports = router;
