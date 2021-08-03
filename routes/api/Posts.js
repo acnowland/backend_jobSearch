@@ -12,7 +12,7 @@ router.get("/:id", (req, res) => {
   Post.findById(req.params.id).then((post) => res.send(post));
 });
 
-// Post
+// Post new
 router.post("/", (req, res) => {
   const newPost = new Post({
     jobTitle: req.body.jobTitle,
